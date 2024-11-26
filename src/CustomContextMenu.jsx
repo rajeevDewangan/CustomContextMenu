@@ -17,19 +17,41 @@ const CustomContextMenu = () => {
 
   const handleContextMenu = (event) => {
     event.preventDefault(); 
-    setMenuPosition({ x: event.pageX, y: event.pageY });
+
+    const screenWidth = window.innerWidth; 
+    const screenHeight = window.innerHeight; 
+    const menuWidth = 200; 
+    const menuHeight = 150;
+
+    let x = event.pageX;
+    let y = event.pageY;
+
+    if (x + menuWidth > screenWidth) {
+      x = screenWidth - menuWidth;
+    }
+
+    if (y + menuHeight > screenHeight) {
+      y = y - (menuHeight + 400); 
+    }
+
+    setMenuPosition({ x, y });
     fetchTodos(); 
   };
 
   const handleClick = () => {
-    setMenuPosition(null);
+    setMenuPosition(null); 
   };
 
   return (
     <div
       onContextMenu={handleContextMenu}
       onClick={handleClick}
-      style={{ height: "100vh", background: "#f9f9f9", position: "relative" }}
+      style={{
+        height: "100vh",
+        background: "#f9f9f9",
+        position: "relative",
+        overflow: "hidden", 
+      }}
     >
       <h1>Right-click anywhere to open the context menu!</h1>
 

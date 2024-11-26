@@ -3,7 +3,7 @@ import CustomContextMenu from "./CustomContextMenu";
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <CustomContextMenu />
     </div>
   );
